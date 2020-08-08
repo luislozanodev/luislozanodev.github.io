@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>MedicalEquipmentDriver.com / Medical Equipment For Sale</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="index is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1 id="logo"><a href="index.html">MedicalEquipmentDriver<span>.Com</span></a></h1>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+
+					<!--
+						".inner" is set up as an inline-block so it automatically expands
+						in both directions to fit whatever's inside it. This means it won't
+						automatically wrap lines, so be sure to use line breaks where
+						appropriate (<br />).
+					-->
+					<div class="inner">
+
+						<header>
+							<h2>MEDICAL EQUIPMENT</h2>
+						</header>
+						<p><strong>Buy/Sell Medical Equipment</strong>
+						<br />
+						Call: (305)965-2211
+						<br />
+						Email: <a href="mailto:info@usedlasers.com">info@usedlasers.com</a>.</p>
+						<footer>
+							<ul class="buttons stacked">
+								<li><a href="#main" class="button fit scrolly">Contact Us</a></li>
+							</ul>
+						</footer>
+
+					</div>
+
+				</section>
+
+			<!-- Main -->
+				<article id="main">
+
+					<!-- Three -->
+						<section class="wrapper style3 container special">
+
+							<!-- Contact -->
+				<div class="content">
+					<header>
+						<h2>Talk to a Medical Equipment specialist</h2>
+						<p>You can also talk to a specialist by calling: <a href="https://api.whatsapp.com/send?phone=13059652211" title="Chat on Whatsapp">(305)965-2211</a></p>
+						<p><strong>MedicalEquipmentDriver.com</strong><br/>
+						905 E Hillboro Blvd, Deerfield Beach, FL 33441</p>
+					</header>
+					<div style="width:70%; display:inline-block;">
+					<form id="my_form" onSubmit="submitForm(); return false;">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name*</label>
+												<input type="text" name="name" id="name" required />
+											</div>
+											<div class="field half">
+												<label for="email">Email*</label>
+												<input type="email" name="email" id="email" required />
+											</div>
+											<div class="field">
+												<label for="message">Message*</label>
+												<textarea name="message" id="message" required rows="5" ></textarea>
+											</div>
+										</div>
+										<br/>
+											<input id="mybtn" type="submit" class="button submit" value="Send Message">
+											<span id="status"></span>
+										
+									</form>
+					</div>
+				</div>
+
+						</section>
+
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+
+					<ul class="icons">
+					<li><a href="https://api.whatsapp.com/send?phone=13059652211" target="_new" class="icon brands circle fa-whatsapp"><span class="label">Whatsapp</span></a></li>
+						<li><a href="https://www.twitter.com/cosmeticlasers" target = "_new" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com/cosmeticlasers" target = "_new" class="icon brands circle fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com/cosmeticlasers" target = "_new" class="icon brands circle fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://www.linkedin.com/in/cosmeticlasers/" target = "_new" class="icon brands circle fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://www.youtube.com/cosmeticlasers" target = "_new" class="icon brands circle fa-youtube"><span class="label">Youtube</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; MedicalEquipmentDriver.Com</li>
+					</ul>
+
+				</footer>
+
+		</div>
+		
+		 <!--form script-->
+    <script>
+        function _(id) {
+            return document.getElementById(id);
+        }
+
+        function submitForm() {
+            _("mybtn").disabled = true;
+            _("status").innerHTML = 'please wait ...';
+            var formdata = new FormData();
+            formdata.append("name", _("name").value);
+            formdata.append("email", _("email").value);
+            formdata.append("message", _("message").value);
+            var ajax = new XMLHttpRequest();
+            ajax.open("POST", "action_page_post1.php");
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    if (ajax.responseText == "success") {
+                        _("my_form").innerHTML = '<h3 style="padding-top:30px;">Thanks ' + _("name").value + ', your message has been sent! <br><br> We will get back to your shortly.</h3>';
+                    } else {
+                        _("status").innerHTML = ajax.responseText;
+                        _("mybtn").disabled = false;
+                    }
+                }
+            }
+            ajax.send(formdata);
+        }
+    </script>
+    <!--form script-->
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
