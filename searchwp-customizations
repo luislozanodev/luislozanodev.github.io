@@ -1,0 +1,53 @@
+<?php
+/*
+Plugin Name: SearchWP Customizations
+Description: Customizations for SearchWP
+Version: 1.0.0
+*/
+
+// Add all hooks and custom code here.
+
+
+// Tell SearchWP to search the entire Multisite network when searching on the main site.
+add_filter( 'searchwp\query\args', function( $args, $query ) {
+	// If this is not site 1, bail out.
+	if ( 1 !== get_current_blog_id() ) {
+	  return $args;
+	}
+	
+	// Search all sites.
+	//$args['site'] = 'all'; //search all sites
+	$args['site'] = [1,2,3]; //search site by ID
+
+	// Retain site info in results.
+	$args['fields'] = 'default';
+
+	return $args;
+}, 10, 2 );
+
+
+
+//Integrate SearchWP highlighter to Astra search results excerpt
+function my_searchwp_excerpt( $excerpt ){
+	global $post;
+
+	remove_filter( 'get_the_excerpt', 'my_searchwp_excerpt', 999 );
+
+	if ( ! $post instanceof WP_Post || ! is_search() ||  post_password_required() ) {
+		return $excerpt;
+	}
+
+	$highlighter = new \SearchWP\Highlighter();
+
+	$source    = \SearchWP\Utils::get_post_type_source_name( get_post_type() );
+	$entry = new \SearchWP\Entry( $source, get_the_ID(), false, false );
+	$search_string = sanitize_text_field( get_search_query( false ) );
+	$terms = explode( ' ', $search_string );
+	$terms = array_map( 'sanitize_text_field', $terms );
+
+	$excerpt = \SearchWP\Sources\Post::get_global_excerpt( $entry, $search_string );
+	$excerpt = $highlighter->apply( $excerpt, $terms );
+
+	return $excerpt;
+}
+add_filter( 'get_the_excerpt', 'my_searchwp_excerpt', 999 );
